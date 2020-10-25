@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +18,9 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name="id_cliente",nullable = false)
     private Cliente idCliente;
-    private Date fecha;
-
+    private LocalDateTime fecha;
+    @OneToMany(mappedBy = "venta", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<DetalleVenta>detalleVentas;
 
 }

@@ -1,43 +1,47 @@
 package com.soaint.service.impl;
 
-import com.soaint.entity.Cliente;
-import com.soaint.repository.IClienteRepository;
-import com.soaint.service.ClienteService;
+import com.soaint.entity.Venta;
+import com.soaint.repository.IVentaRepository;
+import com.soaint.service.VentaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class VentaServiceImpl implements ClienteService {
-    private IClienteRepository repository;
+public class VentaServiceImpl implements VentaService {
+   private IVentaRepository repository;
 
-    public VentaServiceImpl(IClienteRepository repository) {
+    public VentaServiceImpl(IVentaRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public Cliente registrar(Cliente cliente) {
-        return repository.save(cliente);
+    public Venta registrar(Venta venta) {
+        venta.getDetalleVentas().forEach(x->{
+            x.setVenta(venta);
+        });
+        return repository.save(venta);
     }
 
     @Override
-    public void modificar(Cliente cliente) {
-        repository.save(cliente);
+    public void modificar(Venta venta) {
+        repository.save(venta);
+
     }
 
     @Override
-    public void eliminar(int idCliente) {
-         repository.deleteById(idCliente);
+    public void eliminar(int idVenta) {
+        repository.deleteById(idVenta);
+
     }
 
     @Override
-    public Optional<Cliente> listarId(int idCliente) {
-        return repository.findById(idCliente);
+    public Venta listarId(int idVenta) {
+        return repository.findById(idVenta).get();
     }
 
     @Override
-    public List<Cliente> listar() {
+    public List<Venta> listar() {
         return repository.findAll();
     }
 }

@@ -13,7 +13,7 @@ public interface ClienteService {
 
     void eliminar(int idCliente);
 
-    Optional<Cliente> listarId(int idCliente);
+   Cliente listarId(int idCliente);
 
     List<Cliente> listar();
 }

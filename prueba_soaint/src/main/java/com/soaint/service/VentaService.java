@@ -1,19 +1,18 @@
 package com.soaint.service;
 
-import com.soaint.entity.Cliente;
+import com.soaint.entity.Venta;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface VentaService {
 
-    Cliente registrar(Cliente cliente);
+    Venta registrar(Venta venta);
 
-    void modificar(Cliente cliente);
+    void modificar(Venta venta);
 
-    void eliminar(int idCliente);
+    void eliminar(int idVenta);
 
-    Optional<Cliente> listarId(int idCliente);
+    Venta listarId(int idVenta);
 
-    List<Cliente> listar();
+    List<Venta> listar();
 }

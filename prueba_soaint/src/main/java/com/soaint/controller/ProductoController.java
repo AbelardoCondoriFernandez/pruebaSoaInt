@@ -1,7 +1,7 @@
 package com.soaint.controller;
 
-import com.soaint.entity.Cliente;
-import com.soaint.service.ClienteService;
+import com.soaint.entity.Producto;
+import com.soaint.service.ProductoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,41 +11,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/soaint/cliente")
+@RequestMapping("/soaint/producto")
 public class ProductoController {
 
-    private final ClienteService service;
+    private final ProductoService service;
 
-    public ProductoController(ClienteService service) {
+    public ProductoController(ProductoService service) {
         this.service = service;
     }
 
     @GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Cliente>> listar() {
-        List<Cliente> cliente = new ArrayList<>();
+    public ResponseEntity<List<Producto>> listar() {
+        List<Producto> producto = new ArrayList<>();
         try {
-            cliente = service.listar();
+            producto = service.listar();
         } catch (Exception e) {
-            return new ResponseEntity<List<Cliente>>(cliente, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<Producto>>(producto, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<List<Cliente>>(cliente, HttpStatus.OK);
+        return new ResponseEntity<List<Producto>>(producto, HttpStatus.OK);
 
     }
-
-    // Registro por el tipo de objeto Estandar
+    @GetMapping(value = "/listar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Producto> listarId(@PathVariable("id") Integer id) {
+        Producto producto = new Producto();
+        try {
+            producto = service.listarId(id);
+        } catch (Exception e) {
+            return new ResponseEntity<Producto>(producto, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<Producto>(producto, HttpStatus.OK);
+    }
     @PostMapping(value = "/registrar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cliente> registrar(@RequestBody Cliente cliente) {
-        service.registrar(cliente);
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(cliente);
+    public ResponseEntity<Producto> registrar(@RequestBody Producto producto) {
+        service.registrar(producto);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(producto);
 
     }
 
     @PutMapping(value = "/actualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> actualizar(@RequestBody Cliente cliente) {
+    public ResponseEntity<Integer> actualizar(@RequestBody Producto producto) {
 
         int resultado = 0;
         try {
-            service.modificar(cliente);
+            service.modificar(producto);
             resultado = 1;
         } catch (Exception e) {
             resultado = 0;

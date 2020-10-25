@@ -1,9 +1,10 @@
 package com.soaint.repository;
 
 import com.soaint.entity.Cliente;
+import com.soaint.entity.Venta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IVentaRepository extends JpaRepository<Cliente,Integer> {
+public interface IVentaRepository extends JpaRepository<Venta,Integer> {
 }

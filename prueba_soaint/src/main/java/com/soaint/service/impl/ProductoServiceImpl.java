@@ -1,43 +1,44 @@
 package com.soaint.service.impl;
 
-import com.soaint.entity.Cliente;
-import com.soaint.repository.IClienteRepository;
-import com.soaint.service.ClienteService;
+import com.soaint.entity.Producto;
+import com.soaint.repository.IProductoRepository;
+import com.soaint.service.ProductoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
-public class ProductoServiceImpl implements ClienteService {
-    private IClienteRepository repository;
+public class ProductoServiceImpl implements ProductoService {
+    private IProductoRepository repository;
 
-    public ProductoServiceImpl(IClienteRepository repository) {
+    public ProductoServiceImpl(IProductoRepository repository) {
         this.repository = repository;
     }
 
+
     @Override
-    public Cliente registrar(Cliente cliente) {
-        return repository.save(cliente);
+    public Producto registrar(Producto producto) {
+        return repository.save(producto);
     }
 
     @Override
-    public void modificar(Cliente cliente) {
-        repository.save(cliente);
+    public void modificar(Producto producto) {
+        repository.save(producto);
     }
 
     @Override
-    public void eliminar(int idCliente) {
-         repository.deleteById(idCliente);
+    public void eliminar(int idProducto) {
+        repository.deleteById(idProducto);
     }
 
     @Override
-    public Optional<Cliente> listarId(int idCliente) {
-        return repository.findById(idCliente);
+    public Producto listarId(int idProducto) {
+        return repository.findById(idProducto).get();
     }
 
     @Override
-    public List<Cliente> listar() {
+    public List<Producto> listar() {
         return repository.findAll();
     }
 }

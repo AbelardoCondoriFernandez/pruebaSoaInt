@@ -1,19 +1,16 @@
 package com.soaint.service;
 
-import com.soaint.entity.Cliente;
+import com.soaint.entity.Producto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductoService {
 
-    Cliente registrar(Cliente cliente);
+    Producto registrar(Producto producto);
 
-    void modificar(Cliente cliente);
+    void modificar(Producto producto);
 
-    void eliminar(int idCliente);
-
-    Optional<Cliente> listarId(int idCliente);
-
-    List<Cliente> listar();
+    void eliminar(int idProducto);
+    Producto listarId(int idProducto);
+    List<Producto> listar();
 }

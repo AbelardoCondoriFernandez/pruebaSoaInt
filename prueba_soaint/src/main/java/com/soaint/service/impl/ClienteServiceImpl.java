@@ -32,8 +32,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Optional<Cliente> listarId(int idCliente) {
-        return repository.findById(idCliente);
+    public Cliente listarId(int idCliente) {
+        return repository.findById(idCliente).get();
     }
 
     @Override

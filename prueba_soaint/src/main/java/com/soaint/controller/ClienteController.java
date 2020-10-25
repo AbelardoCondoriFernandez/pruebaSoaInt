@@ -31,8 +31,16 @@ public class ClienteController {
         return new ResponseEntity<List<Cliente>>(cliente, HttpStatus.OK);
 
     }
-
-    // Registro por el tipo de objeto Estandar
+    @GetMapping(value = "/listar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Cliente> listarId(@PathVariable("id") Integer id) {
+        Cliente cliente = new Cliente();
+        try {
+            cliente = service.listarId(id);
+        } catch (Exception e) {
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
     @PostMapping(value = "/registrar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cliente> registrar(@RequestBody Cliente cliente) {
         service.registrar(cliente);
